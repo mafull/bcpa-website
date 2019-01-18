@@ -1,9 +1,13 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "jest/globals": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -12,16 +16,26 @@
         "sourceType": "module"
     },
     "plugins": [
+        "jest",
         "react"
     ],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "rules": {
         "indent": [
             "error",
             4
         ],
-        "linebreak-style": [
+        "max-len": [
             "error",
-            "unix"
+            80
+        ],
+        "no-multiple-empty-lines": [
+            "error",
+            { "max": 2 }
         ],
         "quotes": [
             "error",

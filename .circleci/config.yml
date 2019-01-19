@@ -8,12 +8,12 @@ jobs:
 
     steps:
       # Restore source code cache
-      -restore_cache:
-        name: Restoring source code cache
-        keys:
-          - source-{{ .Branch }}-{{ .Revision }}
-          - source-{{ .Branch }}-
-          - source-
+      - restore_cache:
+          name: Restoring source code cache
+          keys:
+            - source-{{ .Branch }}-{{ .Revision }}
+            - source-{{ .Branch }}-
+            - source-
 
       # Checkout newest source code
       - checkout:

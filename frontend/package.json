@@ -1,6 +1,7 @@
 {
   "name": "bcpa-website-frontend",
   "description": "BCPA Website Frontend",
+  "author": "Max Fuller",
   "version": "0.1.0",
   "private": true,
   "main": "src/index.tsx",

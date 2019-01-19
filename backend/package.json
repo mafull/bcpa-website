@@ -1,0 +1,35 @@
+{
+  "name": "bcpa-website-backend",
+  "description": "BCPA Website Backend",
+  "author": "Max Fuller",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js --exec babel-node"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,tsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^5.12.1",
+    "nodemon": "^1.18.9"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "dateformat": "^3.0.3",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "winston": "^3.1.0"
+  }
+}

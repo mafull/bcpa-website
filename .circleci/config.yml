@@ -7,54 +7,47 @@ jobs:
       - image: circleci/node:11.0.0
 
     steps:
-      # Restore source code cache
       - restore_cache:
-          name: Restoring source code cache
+          name: Restore source code cache
           keys:
             - source-{{ .Branch }}-{{ .Revision }}
             - source-{{ .Branch }}-
             - source-
 
-      # Checkout newest source code
       - checkout:
+          name: Check out latest source code
           path: ~/bcpa-website
 
-      # Save source code cache
       - save_cache:
-          name: Saving source code cache
+          name: Save source code cache
           key: source-{{ .Branch }}-{{ .Revision }}
           paths:
             - ".git"
 
-      # Restore npm cache
       - restore_cache:
-          name: Restoring npm cache
+          name: Restore npm cache
           keys:
             - npm-{{ .Branch }}-{{ checksum "package.json" }}
             - npm-{{ .Branch }}-
             - npm-
 
-      # Update npm
       - run:
-          name: Updating npm
-          command: 'sudo npm install -g npm@latest'
+          name: Update npm
+          command: sudo npm install -g npm@latest
 
-      # Run npm install
       - run:
-          name: Running npm install
-          command: cd frontend && npm install
+          name: Run npm install
+          command: npm install
 
-      # Save npm cache
       - save_cache:
-          name: Saving npm cache
+          name: Save npm cache
           key: npm-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - ./frontend/node_modules
 
-      # Run tests
       - run:
-          name: Running tests
-          command: cd frontend && npm test
+          name: Run tests
+          command: npm test
 
       # - run: # run coverage report
       #     name: code-coverage

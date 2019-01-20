@@ -11,7 +11,7 @@ server.on("error", (error) => {
 );
 
 // Start listening for HTTP requests
-const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3001;
+const PORT = process.env.PORT ? process.env.PORT : 3001;
 const HOSTNAME = process.env.HOSTNAME || "localhost";
 server.listen(PORT, HOSTNAME, (error) => {
     if (error) throw error;

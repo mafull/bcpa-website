@@ -5,6 +5,9 @@
   "version": "0.1.0",
   "private": true,
   "main": "src/index.js",
+  "engines": {
+    "node": "9.4.0"
+  },
   "scripts": {
     "start": "nodemon src/index.js --exec babel-node"
   },

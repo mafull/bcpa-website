@@ -1,54 +1,59 @@
 version: 2
-jobs:
-  build:
-    working_directory: ~/bcpa-website/backend
+
+_defaults: &_defaults
     docker:
-      # Configure containers
-      - image: circleci/node:11.0.0
+        - image: circleci/node:11.0.0
+    working_directory: ~/bcpa-website/backend
 
-    steps:
-      - restore_cache:
-          name: Restore source code cache
-          keys:
-            - source-{{ .Branch }}-{{ .Revision }}
-            - source-{{ .Branch }}-
-            - source-
+jobs:
+    build:
+        <<: *_defaults
 
-      - checkout:
-          name: Check out latest source code
-          path: ~/bcpa-website
+        steps:
+            - restore_cache:
+                name: Restore source code cache
+                keys:
+                    - source-{{ .Branch }}-{{ .Revision }}
+                    - source-{{ .Branch }}-
+                    - source-
 
-      - save_cache:
-          name: Save source code cache
-          key: source-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - ".git"
+        - checkout:
+            name: Check out latest source code
+            path: ~/bcpa-website
 
-      - restore_cache:
-          name: Restore npm cache
-          keys:
-            - npm-{{ .Branch }}-{{ checksum "package.json" }}
-            - npm-{{ .Branch }}-
-            - npm-
+        - save_cache:
+            name: Save source code cache
+            key: source-{{ .Branch }}-{{ .Revision }}
+            paths:
+                - ".git"
 
-      - run:
-          name: Update npm
-          command: sudo npm install -g npm@latest
+        - restore_cache:
+            name: Restore npm cache
+            keys:
+                - npm-{{ .Branch }}-{{ checksum "package.json" }}
+                - npm-{{ .Branch }}-
+                - npm-
 
-      - run:
-          name: Run npm install
-          command: npm install
+        - run:
+            name: Update npm
+            command: sudo npm install -g npm@latest
 
-      - save_cache:
-          name: Save npm cache
-          key: npm-{{ .Branch }}-{{ checksum "package.json" }}
-          paths:
-            - ./backend/node_modules
-  test:
-    steps:
-      - run:
-          name: Run tests
-          command: npm test
+        - run:
+            name: Run npm install
+            command: npm install
+
+        - save_cache:
+            name: Save npm cache
+            key: npm-{{ .Branch }}-{{ checksum "package.json" }}
+            paths:
+                - ./backend/node_modules
+    test:
+        <<: *_defaults
+
+        steps:
+            - run:
+                name: Run tests
+                command: npm test
 
       # - run: # run coverage report
       #     name: code-coverage

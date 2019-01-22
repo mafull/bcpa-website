@@ -1,13 +1,17 @@
 version: 2
 
-_defaults: &_defaults
-    docker:
-        - image: circleci/node:11.0.0
-    working_directory: ~/bcpa-website/backend
+executors:
+    my-executor:
+        docker:
+            - image: circleci/node:11.0.0
+        working_directory: /tmp/bcpa-website/backend
 
 jobs:
+    prepare-source:
+        executor: my-executor
+
     build:
-        <<: *_defaults
+        executor: my-executor
 
         steps:
             - restore_cache:
@@ -48,10 +52,18 @@ jobs:
                 paths:
                     - ./backend/node_modules
 
+            - persist_to_workspace:
+                root: ~/bcpa-website/backend
+                paths:
+                    - ./*
+
     test:
-        <<: *_defaults
+        executor: my-executor
 
         steps:
+            - attach_workspace:
+                at: /tmp/bcpa-website/backend
+
             - run:
                 name: Run tests
                 command: npm test

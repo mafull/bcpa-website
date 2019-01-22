@@ -44,7 +44,8 @@ jobs:
           key: npm-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - ./backend/node_modules
-
+  test:
+    steps:
       - run:
           name: Run tests
           command: npm test

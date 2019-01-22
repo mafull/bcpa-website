@@ -7,9 +7,6 @@ executors:
         working_directory: /tmp/bcpa-website/backend
 
 jobs:
-    prepare-source:
-        executor: my-executor
-
     build:
         executor: my-executor
 

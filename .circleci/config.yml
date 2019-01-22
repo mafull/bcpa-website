@@ -17,36 +17,37 @@ jobs:
                     - source-{{ .Branch }}-
                     - source-
 
-        - checkout:
-            name: Check out latest source code
-            path: ~/bcpa-website
+            - checkout:
+                name: Check out latest source code
+                path: ~/bcpa-website
 
-        - save_cache:
-            name: Save source code cache
-            key: source-{{ .Branch }}-{{ .Revision }}
-            paths:
-                - ".git"
+            - save_cache:
+                name: Save source code cache
+                key: source-{{ .Branch }}-{{ .Revision }}
+                paths:
+                    - ".git"
 
-        - restore_cache:
-            name: Restore npm cache
-            keys:
-                - npm-{{ .Branch }}-{{ checksum "package.json" }}
-                - npm-{{ .Branch }}-
-                - npm-
+            - restore_cache:
+                name: Restore npm cache
+                keys:
+                    - npm-{{ .Branch }}-{{ checksum "package.json" }}
+                    - npm-{{ .Branch }}-
+                    - npm-
 
-        - run:
-            name: Update npm
-            command: sudo npm install -g npm@latest
+            - run:
+                name: Update npm
+                command: sudo npm install -g npm@latest
 
-        - run:
-            name: Run npm install
-            command: npm install
+            - run:
+                name: Run npm install
+                command: npm install
 
-        - save_cache:
-            name: Save npm cache
-            key: npm-{{ .Branch }}-{{ checksum "package.json" }}
-            paths:
-                - ./backend/node_modules
+            - save_cache:
+                name: Save npm cache
+                key: npm-{{ .Branch }}-{{ checksum "package.json" }}
+                paths:
+                    - ./backend/node_modules
+
     test:
         <<: *_defaults
 

@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/bcpa-website/frontend
+    working_directory: ~/bcpa-website/backend
     docker:
       # Configure containers
       - image: circleci/node:11.0.0
@@ -43,7 +43,7 @@ jobs:
           name: Save npm cache
           key: npm-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
-            - ./frontend/node_modules
+            - ./backend/node_modules
 
       - run:
           name: Run tests

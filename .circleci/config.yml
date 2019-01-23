@@ -70,10 +70,11 @@ jobs:
 
             # Retain files for subsequent jobs
             - persist_to_workspace:
+                name: Store files for subsequent jobs
                 root: /tmp/bcpa-website
                 paths:
-                    - ./backend/*
-                    - ./frontend/*
+                    - ./backend
+                    - ./frontend
 
     # -- TEST BACKEND --
     test-backend:
@@ -104,9 +105,18 @@ jobs:
         executor: my-executor
 
         steps:
+            - attach_workspace:
+                at: /tmp/bcpa-website
+
             - run:
-                name: ECHO
-                command: echo "building backend"
+                name: Build production API code 
+                command: npm run build --prefix backend
+
+            - persist_to_workspace:
+                name: Store build output for deployment job
+                root: /tmp/bcpa-website
+                paths:
+                    - ./backend/build
 
     # -- BUILD FRONTEND --
     build-frontend:
@@ -117,8 +127,14 @@ jobs:
                 at: /tmp/bcpa-website
 
             - run:
-                name: BUILD FRONTEND
-                command: npm test --prefix frontend
+                name: Build production React code 
+                command: npm run build --prefix frontend
+
+            - persist_to_workspace:
+                name: Store build output for deployment job
+                root: /tmp/bcpa-website
+                paths:
+                    - ./frontend/build
 
     # -- DEPLOY --
     deploy:
@@ -139,12 +155,12 @@ workflows:
             - test-backend:
                 requires:
                     - prepare
-            - build-backend:
-                requires:
-                    - test-backend
             - test-frontend:
                 requires:
                     - prepare
+            - build-backend:
+                requires:
+                    - test-backend
             - build-frontend:
                 requires:
                     - test-frontend

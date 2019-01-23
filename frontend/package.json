@@ -6,10 +6,11 @@
   "private": true,
   "main": "src/index.tsx",
   "scripts": {
+    "build": "npm run clean:build && react-scripts build",
+    "clean:build": "rm -rf build",
+    "lint": "eslint --fix src/*.{js,tsx}",
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "lint": "eslint --fix src/*.{js,tsx}"
+    "test": "react-scripts test"
   },
   "husky": {
     "hooks": {

@@ -9,8 +9,10 @@
     "node": "9.4.0"
   },
   "scripts": {
-    "start": "nodemon src/index.js --exec babel-node",
-    "test": ""
+    "build": "npm run clean:build && babel src -d build",
+    "clean:build": "rm -rf build",
+    "start": "nodemon --exec babel-node src/index.js",
+    "test": "echo \"No test specified\" && exit 0"
   },
   "husky": {
     "hooks": {

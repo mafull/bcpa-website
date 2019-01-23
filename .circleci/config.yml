@@ -99,18 +99,59 @@ jobs:
                 name: Run tests
                 command: npm test --prefix frontend
 
+    # -- BUILD BACKEND --
+    build-backend:
+        executor: my-executor
+
+        steps:
+            - run:
+                name: ECHO
+                command: echo "building backend"
+
+    # -- BUILD FRONTEND --
+    build-frontend:
+        executor: my-executor
+
+        steps:
+            - attach_workspace:
+                at: /tmp/bcpa-website
+
+            - run:
+                name: BUILD FRONTEND
+                command: npm test --prefix frontend
+
+    # -- DEPLOY --
+    deploy:
+        executor: my-executor
+
+        steps:
+            - run:
+                name: ECHO
+                command: echo "deploying"
+            
+
 workflows:
     version: 2.1
 
-    build-and-test:
+    prepare-test-build-deploy:
         jobs:
             - prepare
             - test-backend:
                 requires:
                     - prepare
+            - build-backend:
+                requires:
+                    - test-backend
             - test-frontend:
                 requires:
                     - prepare
+            - build-frontend:
+                requires:
+                    - test-frontend
+            - deploy:
+                requires:
+                    - build-backend
+                    - build-frontend
 
       # - run: # run coverage report
       #     name: code-coverage

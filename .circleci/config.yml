@@ -4,7 +4,7 @@ executors:
     my-executor:
         docker:
             - image: circleci/node:11.0.0
-        working_directory: /tmp/bcpa-website/backend
+        working_directory: /tmp/bcpa-website
 
 jobs:
     build:
@@ -12,28 +12,28 @@ jobs:
 
         steps:
             - restore_cache:
-                name: Restore source code cache
+                name: Restore source code from cache
                 keys:
-                    - source-{{ .Branch }}-{{ .Revision }}
-                    - source-{{ .Branch }}-
-                    - source-
+                    - source-v1-{{ .Branch }}-{{ .Revision }}
+                    - source-v1-{{ .Branch }}-
+                    - source-v1
 
             - checkout:
                 name: Check out latest source code
-                path: ~/bcpa-website
+                # path: ~/bcpa-website
 
             - save_cache:
-                name: Save source code cache
-                key: source-{{ .Branch }}-{{ .Revision }}
+                name: Cache source code
+                key: source-v1-{{ .Branch }}-{{ .Revision }}
                 paths:
                     - ".git"
 
             - restore_cache:
-                name: Restore npm cache
+                name: Restore backend node_modules from cache
                 keys:
-                    - npm-{{ .Branch }}-{{ checksum "package.json" }}
-                    - npm-{{ .Branch }}-
-                    - npm-
+                    - npm-backend-v1-{{ .Branch }}-{{ checksum "backend/package.json" }}
+                    - npm-backend-v1-{{ .Branch }}-
+                    - npm-backend-v1
 
             - run:
                 name: Update npm
@@ -41,16 +41,16 @@ jobs:
 
             - run:
                 name: Run npm install
-                command: npm install
+                command: npm install --prefix backend
 
             - save_cache:
-                name: Save npm cache
-                key: npm-{{ .Branch }}-{{ checksum "package.json" }}
+                name: Cache backend node_modules
+                key: npm-backend-v1-{{ .Branch }}-{{ checksum "backend/package.json" }}
                 paths:
                     - ./backend/node_modules
 
             - persist_to_workspace:
-                root: ~/bcpa-website/backend
+                root: /tmp/bcpa-website/backend
                 paths:
                     - ./*
 
@@ -63,7 +63,7 @@ jobs:
 
             - run:
                 name: Run tests
-                command: npm test
+                command: npm test --prefix backend
 
 workflows:
     version: 2.1

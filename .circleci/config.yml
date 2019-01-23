@@ -141,9 +141,12 @@ jobs:
         executor: my-executor
 
         steps:
+            - attach_workspace:
+                at: /tmp/bcpa-website
+
             - run:
-                name: ECHO
-                command: echo "deploying"
+                name: Deploy backend to Heroku
+                command: git subtree push --prefix backend heroku master
 
 
 workflows:
@@ -172,6 +175,9 @@ workflows:
 
             # Deployment job
             - deploy:
+                # filters:
+                #     branches:
+                #         only: develop
                 requires:
                     - build-backend
                     - build-frontend

@@ -7,10 +7,12 @@ executors:
         working_directory: /tmp/bcpa-website
 
 jobs:
-    build:
+    # -- PREPARE SOURCE CODE, NPM, AND NODE_MODULES --
+    prepare:
         executor: my-executor
 
         steps:
+            # Prepare source code
             - restore_cache:
                 name: Restore source code from cache
                 keys:
@@ -19,8 +21,7 @@ jobs:
                     - source-v1
 
             - checkout:
-                name: Check out latest source code
-                # path: ~/bcpa-website
+                name: Checkout latest source code
 
             - save_cache:
                 name: Cache source code
@@ -28,20 +29,32 @@ jobs:
                 paths:
                     - ".git"
 
+            # Prepare npm and node_modules
+            - run:
+                name: Update npm
+                command: sudo npm install -g npm@latest
+
             - restore_cache:
                 name: Restore backend node_modules from cache
                 keys:
                     - npm-backend-v1-{{ .Branch }}-{{ checksum "backend/package.json" }}
                     - npm-backend-v1-{{ .Branch }}-
                     - npm-backend-v1
+            
+            - restore_cache:
+                name: Restore frontend node_modules from cache
+                keys:
+                    - npm-frontend-v1-{{ .Branch }}-{{ checksum "frontend/package.json" }}
+                    - npm-frontend-v1-{{ .Branch }}-
+                    - npm-frontend-v1
 
             - run:
-                name: Update npm
-                command: sudo npm install -g npm@latest
-
-            - run:
-                name: Run npm install
+                name: Run npm install for the backend
                 command: npm install --prefix backend
+
+            - run:
+                name: Run npm install for the frontend
+                command: npm install --prefix frontend
 
             - save_cache:
                 name: Cache backend node_modules
@@ -49,31 +62,56 @@ jobs:
                 paths:
                     - ./backend/node_modules
 
-            - persist_to_workspace:
-                root: /tmp/bcpa-website/backend
+            - save_cache:
+                name: Cache frontend node_modules
+                key: npm-frontend-v1-{{ .Branch }}-{{ checksum "frontend/package.json" }}
                 paths:
-                    - ./*
+                    - ./frontend/node_modules
 
-    test:
+            # Retain files for subsequent jobs
+            - persist_to_workspace:
+                root: /tmp/bcpa-website
+                paths:
+                    - ./backend/*
+                    - ./frontend/*
+
+    # -- TEST BACKEND --
+    test-backend:
         executor: my-executor
 
         steps:
             - attach_workspace:
-                at: /tmp/bcpa-website/backend
+                at: /tmp/bcpa-website
 
             - run:
                 name: Run tests
                 command: npm test --prefix backend
+
+    # -- TEST FRONTEND --
+    test-backend:
+        executor: my-executor
+
+        steps:
+            - attach_workspace:
+                at: /tmp/bcpa-website
+
+            - run:
+                name: Run tests
+                command: npm test --prefix frontend
 
 workflows:
     version: 2.1
 
     build-and-test:
         jobs:
-            - build
-            - test:
+            - prepare
+            - test-backend:
                 requires:
-                    - build
+                    - prepare
+            - test-frontend:
+                requires:
+                    - prepare
+
       # - run: # run coverage report
       #     name: code-coverage
       #     command: './node_modules/.bin/nyc report --reporter=text-lcov'

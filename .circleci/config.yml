@@ -144,26 +144,33 @@ jobs:
             - run:
                 name: ECHO
                 command: echo "deploying"
-            
+
 
 workflows:
     version: 2.1
 
     prepare-test-build-deploy:
         jobs:
+            # Preparatory job
             - prepare
+
+            # Backend jobs
             - test-backend:
-                requires:
-                    - prepare
-            - test-frontend:
                 requires:
                     - prepare
             - build-backend:
                 requires:
                     - test-backend
+
+            # Frontend jobs
+            - test-frontend:
+                requires:
+                    - prepare
             - build-frontend:
                 requires:
                     - test-frontend
+
+            # Deployment job
             - deploy:
                 requires:
                     - build-backend

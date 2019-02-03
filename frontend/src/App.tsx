@@ -1,12 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
+
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 
-class App extends Component {
-    render() {
-        return (
-            <h1>BCPA Website</h1>
-        );
-    }
-}
+const App: React.StatelessComponent<{}> = ({ children: pages }) => (
+    <div>
+        <Header />
+        {pages}
+        <Footer />
+    </div>
+);
 
 export default App;

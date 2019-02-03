@@ -8,6 +8,7 @@
         "eslint:recommended",
         "plugin:react/recommended"
     ],
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -41,6 +42,7 @@
             "error",
             "double"
         ],
+        "react/prop-types": "off",
         "semi": [
             "error",
             "always"

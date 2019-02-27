@@ -1,10 +1,40 @@
-import React, { Component } from "react";
+import React    from "react";
+import {
+    Form,
+    Button,
+    Container
+}               from "semantic-ui-react";
 
 
-class Login extends Component {
+interface LoginState {
+    email: string,
+    password: string
+}
+
+
+class Login extends React.Component<{}, LoginState> {
+
+    // handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
+    //     // const target = event.target as HTMLInputElement;
+    //     // this.setState({ target: event.currentTarget.value })
+    // }
+
     render() {
         return (
-            <h1>Login</h1>
+            <Container>
+                <Form>
+                    <Form.Input
+                        label="Email"
+                        type="email"
+                        onChange={this.handleInputChange}
+                    />
+                    <Form.Input
+                        label="Password"
+                        type="password"
+                    />
+                    <Button>Log In</Button>
+                </Form>
+            </Container>
         );
     }
 }

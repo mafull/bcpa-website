@@ -13,6 +13,8 @@ import Home         from "./pages/Home";
 import Login        from "./pages/Login";
 import store        from "./store";
 
+import "semantic-ui-css/semantic.min.css";
+
 
 ReactDOM.render(
     <Router>
@@ -27,4 +29,5 @@ ReactDOM.render(
             </App>
         </Provider>
     </Router>
-    , document.getElementById("root"));
+    , document.getElementById("root")
+);

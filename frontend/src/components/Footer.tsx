@@ -4,7 +4,7 @@ import React from "react";
 const Footer = () => (
     <div>
         <hr />
-        <h1>Footer</h1>
+        <p><i>{"\u00A9"} Max Fuller 2019</i></p>
     </div>
 );
 

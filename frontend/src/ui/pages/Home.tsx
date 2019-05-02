@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 
-import { Container, Header, Segment } from "semantic-ui-react";
-
 
 class Home extends Component {
     render() {
         return (
             <div>
-                <Segment
+                {/* <Segment
                     inverted
                     textAlign="center"
                     vertical
@@ -35,7 +33,8 @@ class Home extends Component {
                             }}
                         />
                     </Container>
-                </Segment>
+                </Segment> */}
+                Home
             </div>
         );
     }

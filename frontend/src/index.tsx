@@ -7,13 +7,13 @@ import {
     Switch
 }                   from "react-router-dom";
 
-import App          from "./App";
-import EventList    from "./pages/EventList";
-import Home         from "./pages/Home";
-import Login        from "./pages/Login";
-import store        from "./store";
+import App          from "ui/App";
+import EventList    from "ui/pages/EventList";
+import Home         from "ui/pages/Home";
+import Login        from "ui/pages/Login";
+import store        from "store";
 
-import "semantic-ui-css/semantic.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 
 ReactDOM.render(

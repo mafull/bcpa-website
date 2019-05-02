@@ -1,6 +1,5 @@
 import React    from "react";
 import { Link } from "react-router-dom";
-import { Menu } from "semantic-ui-react";
 
 
 const itemsProperties = [
@@ -38,23 +37,24 @@ class Header extends React.Component<{}, HeaderState> {
     }
 
     render() {
-        const menuItems = itemsProperties.map((it, idx: number) => (
-            <Menu.Item
-                as={Link}
-                to={it.target}
-                active={this.state.activeItem === it.name}
-                key={idx}
-                name={it.name}
-                content={it.content}
-                onClick={() => this.handleItemClick(it.name)}
-            />
-        ));
+        // const menuItems = itemsProperties.map((it, idx: number) => (
+        //     <Menu.Item
+        //         as={Link}
+        //         to={it.target}
+        //         active={this.state.activeItem === it.name}
+        //         key={idx}
+        //         name={it.name}
+        //         content={it.content}
+        //         onClick={() => this.handleItemClick(it.name)}
+        //     />
+        // ));
 
         return (
             <div>
-                <Menu>
+                Menu
+                {/* <Menu>
                     {menuItems}
-                </Menu>
+                </Menu> */}
             </div>
         );
     }

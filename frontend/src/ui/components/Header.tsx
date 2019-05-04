@@ -1,28 +1,28 @@
 import React    from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 
-const itemsProperties = [
-    {
-        name: "home",
-        content: "Home",
-        target: "/"
-    },
-    {
-        name: "events",
-        content: "Events",
-        target: "/events"
-    },
-    {
-        name: "login",
-        content: "Login",
-        target: "/login"
-    }
-];
+// const itemsProperties = [
+//     {
+//         name: "home",
+//         content: "Home",
+//         target: "/"
+//     },
+//     {
+//         name: "events",
+//         content: "Events",
+//         target: "/events"
+//     },
+//     {
+//         name: "login",
+//         content: "Login",
+//         target: "/login"
+//     }
+// ];
 
 
 interface HeaderState {
-    activeItem: string
+    activeItem: string;
 }
 
 class Header extends React.Component<{}, HeaderState> {

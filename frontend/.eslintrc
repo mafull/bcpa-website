@@ -6,7 +6,8 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -18,7 +19,8 @@
     },
     "plugins": [
         "jest",
-        "react"
+        "react",
+        "@typescript-eslint"
     ],
     "settings": {
         "react": {
@@ -32,7 +34,7 @@
         ],
         "max-len": [
             "error",
-            80
+            120
         ],
         "no-multiple-empty-lines": [
             "error",
@@ -46,6 +48,9 @@
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "@typescript-eslint/explicit-member-accessibility": "off",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "error"
     }
 }

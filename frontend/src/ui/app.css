@@ -1,0 +1,4 @@
+.bg-primary, .btn-primary {
+    background-color: green !important;
+    border-color: green !important;
+}

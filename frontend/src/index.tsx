@@ -7,13 +7,14 @@ import {
     Switch
 }                   from "react-router-dom";
 
+import store        from "state";
 import App          from "ui/App";
 import EventList    from "ui/pages/EventList";
 import Home         from "ui/pages/Home";
 import Login        from "ui/pages/Login";
-import store        from "store";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import "ui/app.css";
 
 
 ReactDOM.render(

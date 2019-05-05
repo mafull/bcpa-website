@@ -1,17 +1,15 @@
-import React, { Component } from "react";
+import React    from "react";
+import { connect }  from "react-redux";
+
+import ListGroup    from "react-bootstrap/ListGroup";
 
 
-class EventList extends Component {
-    render() {
-        return (
-            <ul>
-                <li>Event A</li>
-                <li>Event B</li>
-                <li>Event C</li>
-                <li>Event D</li>
-            </ul>
-        );
-    }
-}
+const EventList: any/*React.FC<{}>*/ = ({ events }: { events: string[]}) => (
+    <ListGroup>
+        {events.map((event: string) => <ListGroup.Item key={event}>{event}</ListGroup.Item>)}
+    </ListGroup>
+);
 
-export default EventList;
+export default connect((state: any) => ({
+    events: state.events.items
+}))(EventList);

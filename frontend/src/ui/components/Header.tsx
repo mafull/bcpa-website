@@ -1,5 +1,8 @@
 import React    from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+import Nav      from "react-bootstrap/Nav";
+import Navbar   from "react-bootstrap/Navbar";
 
 
 // const itemsProperties = [
@@ -21,43 +24,26 @@ import React    from "react";
 // ];
 
 
-interface HeaderState {
-    activeItem: string;
-}
-
-class Header extends React.Component<{}, HeaderState> {
-    state = {
-        activeItem: ""
-    }
-
-    handleItemClick = (itemName: string): void => {
-        if (this.state.activeItem !== itemName) {
-            this.setState({ activeItem: itemName });
-        }
-    }
-
-    render() {
-        // const menuItems = itemsProperties.map((it, idx: number) => (
-        //     <Menu.Item
-        //         as={Link}
-        //         to={it.target}
-        //         active={this.state.activeItem === it.name}
-        //         key={idx}
-        //         name={it.name}
-        //         content={it.content}
-        //         onClick={() => this.handleItemClick(it.name)}
-        //     />
-        // ));
-
-        return (
-            <div>
-                Menu
-                {/* <Menu>
-                    {menuItems}
-                </Menu> */}
-            </div>
-        );
-    }
-}
+const Header: React.FC<{}> = () => (
+    <div>
+        <Navbar bg="primary" expand="sm" variant="dark">
+            <Navbar.Brand as={Link} to="/" >BCPA</Navbar.Brand>
+            <Navbar.Toggle />
+            <Navbar.Collapse>
+                <Nav>
+                    {
+                        ["Events", "Login"].map(name => (
+                            <Nav.Link key={name}
+                                as={Link}
+                                to={name.toLowerCase()}>
+                                {name}
+                            </Nav.Link>
+                        ))
+                    }
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
+    </div>
+);
 
 export default Header;

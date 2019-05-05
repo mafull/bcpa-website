@@ -1,43 +1,39 @@
-import React, { Component } from "react";
+import React, { useState }  from "react";
+
+import Carousel from "react-bootstrap/Carousel";
 
 
-class Home extends Component {
-    render() {
-        return (
-            <div>
-                {/* <Segment
-                    inverted
-                    textAlign="center"
-                    vertical
-                >
-                    <Container text>
-                        <Header
-                            as="h1"
-                            content="BCPA"
-                            inverted
-                            style={{
-                                fontSize: "4em",
-                                fontWeight: "normal"
-                            }}
-                        />
-                        <Header
-                            as="h2"
-                            content={
-                                "British Collegiate Parachute Association"
-                                + " - the UK's university skydiving community"
-                            }
-                            inverted
-                            style={{
-                                fontSize: "1.7em",
-                                fontWeight: "normal"
-                            }}
-                        />
-                    </Container>
-                </Segment> */}
-                Home
-            </div>
-        );
-    }
-}
+const Home: React.FC<{}> = () => {
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    return (
+        <Carousel
+            activeIndex={activeIndex}
+            onSelect={(idx: number) => setActiveIndex(idx)}
+        >
+            <Carousel.Item>
+                <img src="img1.jpg" />
+                <Carousel.Caption>
+                    <h3>Vertex 1</h3>
+                    <p>SOme description goes here</p>
+                </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+                <img src="img2.jpg" />
+                <Carousel.Caption>
+                    <h3>Vertex 2</h3>
+                    <p>SOme description goes here</p>
+                </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+                <img src="img3.png" />
+                <Carousel.Caption>
+                    <h3>Suit</h3>
+                    <p>SOme description goes here</p>
+                </Carousel.Caption>
+            </Carousel.Item>
+        </Carousel>
+    );
+};
 
 export default Home;

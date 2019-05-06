@@ -6,10 +6,12 @@ import {
 import { composeWithDevTools }  from "redux-devtools-extension";
 import thunk                    from "redux-thunk";
 
+import authReducer      from "state/auth";
 import eventsReducer    from "state/events";
 
 
 const rootReducer = combineReducers({
+    auth: authReducer,
     events: eventsReducer
 });
 

@@ -1,12 +1,24 @@
-import React    from "react";
-import { Link } from "react-router-dom";
+import _            from "lodash";
+import React        from "react";
+import { connect }  from "react-redux";
+import { Link }     from "react-router-dom";
 
 import Container    from "react-bootstrap/Container";
 import Nav          from "react-bootstrap/Nav";
 import Navbar       from "react-bootstrap/Navbar";
 
+import authActions  from "state/auth/actions";
 
-const Header: React.FC<{}> = () => (
+
+interface HeaderProps {
+    isLoggedIn?: boolean;
+    loggedInUser?: {
+        name: string;
+    };
+    logOut(): void;
+}
+
+const Header: React.FC<HeaderProps> = ({ isLoggedIn, loggedInUser, logOut }) => (
     <div>
         <Navbar
             bg="primary"
@@ -31,16 +43,29 @@ const Header: React.FC<{}> = () => (
                     </Nav>
                 </Navbar.Collapse>
                 <Nav className="justify-content-end">
-                    <Nav.Link
-                        as={Link}
-
-                        to="login">
-                        Login
-                    </Nav.Link>
+                    {isLoggedIn
+                        ? (
+                            <React.Fragment>
+                                <Nav.Link as={Link} to="profile">{_.get(loggedInUser, "name")}</Nav.Link>
+                                <Nav.Link as={Link} to="" onClick={logOut}>Log out</Nav.Link>
+                            </React.Fragment>
+                        )
+                        : (
+                            <React.Fragment>
+                                <Nav.Link as={Link} to="login">Login</Nav.Link>
+                                <Nav.Link as={Link} to="register">Register</Nav.Link>
+                            </React.Fragment>
+                        )
+                    }
                 </Nav>
             </Container>
         </Navbar>
     </div>
 );
 
-export default Header;
+export default connect((state: any) => ({
+    isLoggedIn: state.auth.isLoggedIn,
+    loggedInUser: state.auth.loggedInUser
+}), {
+    logOut: authActions.logOut
+})(Header);

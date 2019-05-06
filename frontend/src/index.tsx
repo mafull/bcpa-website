@@ -9,12 +9,14 @@ import {
 
 import store        from "state";
 import App          from "ui/App";
+import Clubs        from "ui/pages/Clubs";
 import EventList    from "ui/pages/EventList";
 import Home         from "ui/pages/Home";
+import Leagues      from "ui/pages/Leagues";
 import Login        from "ui/pages/Login";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "ui/app.css";
+import "ui/app.scss";
 
 
 ReactDOM.render(
@@ -24,6 +26,8 @@ ReactDOM.render(
                 <Switch>
                     <Route exact path="/events" component={EventList} />
                     <Route path="/login" component={Login} />
+                    <Route path="/clubs" component={Clubs} />
+                    <Route path="/leagues" component={Leagues} />
                     {/* <Route exact path="/user/:id" component={User} /> */}
                     <Route path="/*" component={Home} />
                 </Switch>

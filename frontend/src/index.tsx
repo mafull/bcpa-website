@@ -11,6 +11,7 @@ import store        from "state";
 import App          from "ui/App";
 import Clubs        from "ui/pages/Clubs";
 import EventList    from "ui/pages/EventList";
+import EventPage    from "ui/pages/EventPage";
 import Home         from "ui/pages/Home";
 import Leagues      from "ui/pages/Leagues";
 import Login        from "ui/pages/Login";
@@ -25,6 +26,7 @@ ReactDOM.render(
             <App>
                 <Switch>
                     <Route exact path="/events" component={EventList} />
+                    <Route exact path="/events/:id" component={EventPage} />
                     <Route path="/login" component={Login} />
                     <Route path="/clubs" component={Clubs} />
                     <Route path="/leagues" component={Leagues} />

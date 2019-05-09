@@ -3,6 +3,7 @@
 const INITIAL_STATE = {
     items: [
         {
+            id: 1,
             name: "BCPA Boogie - 2019",
             location: "Skydive Dunkeswell",
             endTime: new Date(2019, 7, 10, 8, 0, 0),
@@ -11,6 +12,7 @@ const INITIAL_STATE = {
             image: "boogie19.jpg"
         },
         {
+            id: 2,
             name: "BCPA Freshers - 2019",
             location: "Skydive Langar",
             endTime: new Date(2019, 10, 15, 8, 0, 0),
@@ -19,6 +21,7 @@ const INITIAL_STATE = {
             image: "freshers19.jpg"
         },
         {
+            id: 3,
             name: "BCPA Indoors - 2020",
             location: "Twinwoods Adventure",
             endTime: new Date(2019, 2, 10, 21, 30, 0),
@@ -27,6 +30,7 @@ const INITIAL_STATE = {
             image: "indoors19.jpg"
         },
         {
+            id: 4,
             name: "BCPA Tour - 2021",
             location: "San Diego",
             endTime: new Date(2019, 4, 20, 18, 45, 0),

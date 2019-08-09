@@ -18,7 +18,7 @@ const INITIAL_STATE = {
             endTime: new Date(2019, 10, 15, 8, 0, 0),
             startTime: new Date(2019, 10, 18, 16, 0, 0),
             description: "BCPA freshers is our first event of the year, reuniting current BCPA members as well as welcoming in our newbies. We've got jumping for both new and experienced skydivers, coaching, load organising, and of course one of our legendary parties!",
-            image: "freshers19.jpg"
+            image: "pre-beach-jump.jpg"
         },
         {
             id: 3,

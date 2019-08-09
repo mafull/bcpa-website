@@ -1,5 +1,6 @@
 import React        from "react";
 import { connect }  from "react-redux";
+import { Link }     from "react-router-dom";
 
 import Container    from "react-bootstrap/Container";
 import Jumbotron    from "react-bootstrap/Jumbotron";
@@ -7,7 +8,17 @@ import Col          from "react-bootstrap/Col";
 import Row          from "react-bootstrap/Row";
 
 
-const EventListItem = ({ event: { name, description, location, image, startTime, endTime } }: any) => (
+interface EventProps {
+    description: string;
+    endTime: Date;
+    id: number;
+    image: string;
+    location: string;
+    name: string;
+    startTime: Date;
+}
+
+const EventListItem = ({ event: { id, name, description, location, image, startTime, endTime } }: { event: EventProps }) => (
     <Jumbotron className="event-list-item">
         <Container>
             <Row>
@@ -28,13 +39,7 @@ const EventListItem = ({ event: { name, description, location, image, startTime,
 
 
 interface EventListProps {
-    events: {
-        name: string;
-        description: string;
-        image: string;
-        startTime: Date;
-        endTime: Date;
-    }[];
+    events: EventProps[];
     showAll?: boolean;
 }
 
@@ -46,7 +51,9 @@ const EventList: React.FC<EventListProps> = ({ events, showAll = true }) => (
             ? (
                 <React.Fragment>
                     <hr className="hr-text" data-content="Previous" />
-                    {events.map((event) => <EventListItem key={event.name} event={event} />)}
+                    {events.map((event) => (
+                        <EventListItem key={event.name} event={event} />
+                    ))}
                 </React.Fragment>
             )
             : null}

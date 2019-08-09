@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, loggedInUser, logOut }) => 
                 <Navbar.Collapse className="justify-content-center">
                     <Nav>
                         {
-                            ["Events", "Clubs", "Leagues"].map(name => (
+                            ["Events", "Clubs", "Leagues", "Gallery"].map(name => (
                                 <Nav.Link key={name}
                                     as={Link}
                                     to={name.toLowerCase()}>

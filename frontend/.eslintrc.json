@@ -5,9 +5,7 @@
         "react-app",
         "plugin:prettier/recommended"
     ],
-    "plugins": [
-        "@typescript-eslint",
-        "react"
-    ],
+    "plugins": ["@typescript-eslint", "react"],
+    "settings": {},
     "rules": {}
 }

@@ -1,9 +1,8 @@
-import React, { useState }  from "react";
+import React, { useState } from "react";
 
 import Carousel from "react-bootstrap/Carousel";
 
-import EventList    from "ui/pages/EventList";
-
+import EventList from "ui/pages/EventList";
 
 const carouselContent = [
     {
@@ -16,26 +15,27 @@ const carouselContent = [
     }
 ];
 
-
-const Home: React.FC<{}> = () => {
+const Home: React.FC<{}> = (): JSX.Element => {
     const [activeIndex, setActiveIndex] = useState(0);
 
-    const carouselItems = carouselContent.map(({ image, title, text }, idx) => (
-        <Carousel.Item key={idx} >
-            <img src={`images/${image.name}`} alt={image.alt} />
-            <Carousel.Caption>
-                <h3>{title}</h3>
-                <p>{text}</p>
-            </Carousel.Caption>
-        </Carousel.Item>
-    ));
+    const carouselItems = carouselContent.map(
+        ({ image, title, text }, idx): JSX.Element => (
+            <Carousel.Item key={idx}>
+                <img src={`images/${image.name}`} alt={image.alt} />
+                <Carousel.Caption>
+                    <h3>{title}</h3>
+                    <p>{text}</p>
+                </Carousel.Caption>
+            </Carousel.Item>
+        )
+    );
 
     return (
         <React.Fragment>
             <Carousel
                 activeIndex={activeIndex}
                 interval={5000}
-                onSelect={(newIndex: number) => setActiveIndex(newIndex)}
+                onSelect={(newIndex: number): void => setActiveIndex(newIndex)}
             >
                 {carouselItems}
                 {/* <Carousel.Item>
@@ -61,7 +61,11 @@ const Home: React.FC<{}> = () => {
                 </Carousel.Item>
             </Carousel>
             {/* <h1 className="text-center">Upcoming events</h1> */}
-            <hr className="hr-text" data-content="Upcoming events" style={{ color: "black" }}/>
+            <hr
+                className="hr-text"
+                data-content="Upcoming events"
+                style={{ color: "black" }}
+            />
             <EventList showAll={false} />
         </React.Fragment>
     );

@@ -1,25 +1,20 @@
-import React        from "react";
-import ReactDOM     from "react-dom";
-import { Provider } from "react-redux";
-import {
-    BrowserRouter as Router,
-    Route,
-    Switch
-}                   from "react-router-dom";
-
-import store        from "state";
-import App          from "ui/App";
-import Clubs        from "ui/pages/Clubs";
-import EventList    from "ui/pages/EventList";
-import EventPage    from "ui/pages/EventPage";
-import Gallery      from "ui/pages/Gallery";
-import Home         from "ui/pages/Home";
-import Leagues      from "ui/pages/Leagues";
-import Login        from "ui/pages/Login";
-
 import "bootstrap/dist/css/bootstrap.min.css";
-import "ui/app.scss";
+import "./ui/app.scss";
 
+import { Provider } from "react-redux";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+
+import App from "./ui/App";
+import Clubs from "./ui/pages/Clubs";
+import EventList from "./ui/pages/EventList";
+import EventPage from "./ui/pages/EventPage";
+import Gallery from "./ui/pages/Gallery";
+import Home from "./ui/pages/Home";
+import Leagues from "./ui/pages/Leagues";
+import Login from "./ui/pages/Login";
+import React from "react";
+import ReactDOM from "react-dom";
+import store from "./state";
 
 ReactDOM.render(
     <Router>
@@ -37,6 +32,6 @@ ReactDOM.render(
                 </Switch>
             </App>
         </Provider>
-    </Router>
-    , document.getElementById("root")
+    </Router>,
+    document.getElementById("root")
 );

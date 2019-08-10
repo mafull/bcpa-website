@@ -1,8 +1,5 @@
-import React    from "react";
+import React from "react";
 
-
-const Leagues = () => (
-    <h1>Leagues</h1>
-);
+const Leagues = (): JSX.Element => <h1>Leagues</h1>;
 
 export default Leagues;

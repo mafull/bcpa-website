@@ -1,26 +1,32 @@
-import { Formik, FormikActions, FormikProps }   from "formik";
-import React                                    from "react";
+import { Formik, FormikActions, FormikProps } from "formik";
+import React from "react";
 
-import Button       from "react-bootstrap/Button";
-import Container    from "react-bootstrap/Container";
-import Form         from "react-bootstrap/Form";
-
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
 
 interface LoginFormValues {
     email: string;
     password: string;
 }
 
-const Login: React.FC<{}> = () => (
+const Login: React.FC<{}> = (): JSX.Element => (
     <Container>
         <Formik
             initialValues={{ email: "", password: "" }}
-            onSubmit={(values: LoginFormValues, { setSubmitting }: FormikActions<LoginFormValues>) => {
+            onSubmit={(
+                values: LoginFormValues,
+                { setSubmitting }: FormikActions<LoginFormValues>
+            ): void => {
                 alert(JSON.stringify(["submitting", values]));
                 setSubmitting(false);
             }}
         >
-            {({ handleChange, handleSubmit, values }: FormikProps<LoginFormValues>) => (
+            {({
+                handleChange,
+                handleSubmit,
+                values
+            }: FormikProps<LoginFormValues>): JSX.Element => (
                 <Form onSubmit={handleSubmit}>
                     <Form.Group>
                         <Form.Label>Email</Form.Label>
@@ -42,7 +48,9 @@ const Login: React.FC<{}> = () => (
                             value={values.password}
                         />
                     </Form.Group>
-                    <Button type="submit" variant="primary">Log in</Button>
+                    <Button type="submit" variant="primary">
+                        Log in
+                    </Button>
                 </Form>
             )}
         </Formik>

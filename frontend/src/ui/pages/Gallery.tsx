@@ -1,9 +1,8 @@
-import React    from "react";
+import React from "react";
 
-import Card     from "react-bootstrap/Card";
+import Card from "react-bootstrap/Card";
 
-
-const Gallery = () => (
+const Gallery = (): JSX.Element => (
     <React.Fragment>
         <h1>Gallery</h1>
         <Card>
